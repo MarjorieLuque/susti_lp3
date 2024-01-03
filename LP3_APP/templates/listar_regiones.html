@@ -3,10 +3,39 @@
 {% block title %}Listar Regiones{% endblock %}
 
 {% block content %}
-    <h1>Listado de Regiones    </h1>
-    <ul>
-        <li>region1</li>
-        
-        
-    </ul>
+    <h1>Listado de Regiones</h1>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Fecha</th>
+                    <th>Nombre</th>
+                    <th>Imagen</th>
+                    <th>Casos</th>
+                    <th>Muertes</th>
+                    <th>Letalidad</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for region in region %}
+                    <tr>
+                        <td>{{ region.idregion }}</td>
+                        <td>{{ region.date }}</td>
+                        <td>{{ region.name }}</td>
+                        <td>
+                            <img src="{{ region.image.url }}" alt="{{ region.name }}" class="img-thumbnail" style="max-width: 100px; max-height: 100px;">
+                        </td>
+                        <td>{{ region.cases }}</td>
+                        <td>{{ region.deaths }}</td>
+                        <td>{{ region.lethality }}</td>
+                        <td>
+                            <a href="{% url 'region_delete' region.idregion %}" class="btn btn-danger btn-sm">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
